@@ -22,9 +22,9 @@ def banner():
 
 banner()
 parser=argparse.ArgumentParser()
-parser.add_argument("-d", dest="dst", help="destination where to send packet")
+parser.add_argument("-d", dest="dst", help="packet's target")
 parser.add_argument("-p", dest="port", help="port number")
-parser.add_argument("-i", dest="intensity", default=10, help="packet send every N sec. (default=10)")
+parser.add_argument("-i", dest="intensity", default=10, help="packet is being sent in every N sec. (default=10)")
 insert=parser.parse_args()
 UDP_IP=insert.dst
 UDP_PORT=insert.port
@@ -33,10 +33,10 @@ i=1
 
 while True:    
     try:    
-        MESSAGE="nothing"  
+        MESSAGE="nothing" #it is required, but the content doesn't matter... 
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.sendto(MESSAGE, (str(UDP_IP), int(UDP_PORT)))
-        sys.stdout.write(str("\r%i") % i+" packet sent to "+str(UDP_IP)+"!")
+        sys.stdout.write(str("\r%i") % i+" packet(s) sent to "+str(UDP_IP)+"!")
         sys.stdout.flush()
         time.sleep(int(feq))
         i=i+1
@@ -44,10 +44,11 @@ while True:
     except TypeError:
         print("usage: udp [-h] [-c DESTINATION] [-p PORT] [-i INTENSITY]")
         print("arguments:")
-        print("  -h, --help     show this help message and exit")
-        print("  -d DST         destination where to send packet")
+        print("  -h, --help     shows the help messages")
+        print("  -d DST         packet's target (destination of the packet)")
         print("  -p PORT        port number")
-        print("  -i INTENSITY   packet send every N sec. (default=10)")  
+        print("optional argument: ")
+        print("  -i INTENSITY   packet is being sent in every N sec. (default=10)")  
         break
     except KeyboardInterrupt:
         print("\n")
