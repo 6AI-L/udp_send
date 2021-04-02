@@ -43,7 +43,7 @@ while True:
         
     except TypeError:
         print("usage: udp [-h] [-c DESTINATION] [-p PORT] [-i INTENSITY]")
-        print("optional arguments:")
+        print("arguments:")
         print("  -h, --help     show this help message and exit")
         print("  -d DST         destination where to send packet")
         print("  -p PORT        port number")
